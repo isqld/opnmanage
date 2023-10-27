@@ -121,9 +121,7 @@ def main():
     #Notify user of peer configs and next steps
     print(f"Wireguard server config created in {server_config_file}")
     print(f"Wireguard peer configs created in {peers_folder_path}\n")
-    print("Remember to restart the wiregaurd docker container using the following command\n")
-    print("docker compose restart")
-
+    
     #Save the html index file
     with open('web/index.html', 'w') as file:
         write_html(firewall_html, file)
@@ -132,6 +130,8 @@ def main():
     with open(yaml_config_file, 'w') as file:
         write_config(yaml_config, file)
 
+    print("Restarting Docker Containers")
+    os.system(f'docker compose -f {script_dir}/compose.yaml restart')
 
 if __name__ == '__main__':
     main()
