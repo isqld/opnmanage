@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+  wireguard:
+    build:
+      context: .
+      dockerfile: Dockerfile-wireguard
+    volumes:
+      - type: bind
+        source: ./config/wg0.conf
+        target: /etc/wireguard/wg0.conf
+        read_only: true
+    ports:
+      - "51820:51820/udp"
+    restart: unless-stopped
+    privileged: true
+    networks:
+      opnmanage_net:
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    sysctls:
+      - net.ipv4.ip_forward=1
+      - net.ipv4.conf.all.src_valid_mark=1
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    networks:
+      public_net:
+    volumes:
+      - type: bind
+        source: ./web
+        target: /usr/share/nginx/html
+        read_only: true
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=public_net"
+      - "traefik.http.middlewares.opnmanage-redirect-websecure.redirectscheme.scheme=https"
+      - "traefik.http.services.opnmanage.loadbalancer.server.port=80"
+      - "traefik.http.routers.opnmanage-web.middlewares=opnmanage-redirect-websecure"
+      - "traefik.http.routers.opnmanage-web.rule=Host(`opnmanage.i-solutions.net.au`)"
+      - "traefik.http.routers.opnmanage-web.entrypoints=web"
+      - "traefik.http.routers.opnmanage-websecure.rule=Host(`opnmanage.i-solutions.net.au`)"
+      - "traefik.http.routers.opnmanage-websecure.middlewares=isq-whitelist"
+      - "traefik.http.routers.opnmanage-websecure.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.opnmanage-websecure.entrypoints=websecure"
+networks:
+  public_net:
+    name: public_net
+    external: true
+  opnmanage_net:
+    name: opnmanage_net
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.49.0/24

@@ -1,0 +1,6 @@
+FROM nginx:alpine
+
+COPY config/route-entrypoint.sh /route-entrypoint.sh
+RUN chmod +x /route-entrypoint.sh
+
+CMD ["/route-entrypoint.sh"]

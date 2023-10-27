@@ -1,0 +1,28 @@
+.page-head{
+    background: #3C3C3B;
+}
+.navbar-default {
+    background: #3C3C3B;
+    border-color: #2b2b2b
+}
+.brand-logo {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-primary{
+    width: 200px;
+    margin: 10px;
+    background-color: #d94f00;
+    border-color: #b94501;
+    border-radius: 10px;
+}
+
+.btn-primary:hover{
+    background-color: #b94501;
+    border-color: #b94501;
+}
+
+h1{
+    color: #3c3c3b;
+}
