@@ -1,0 +1,32 @@
+config: !OpnManage
+  server: !Interface
+    name: wg0
+    address: 100.64.100.1/32
+    listen_address: server.company.com
+    listen_port: 51820
+    private_key: 
+  techs:
+    - !Tech
+      name: Tech
+      private_key: 
+      address: 100.64.100.2/32
+      allowed_ips: 100.64.100.0/22
+    - !Tech
+      name: Second Tech
+      private_key: 
+      address: 100.64.100.3/32
+      allowed_ips: 100.64.100.0/22
+  firewalls:
+    - !Firewall
+      name: Firewall1
+      private_key: 
+      address: 100.64.101.1/32
+      allowed_ips: 100.64.100.0/24
+      url: https://100.64.101.1/
+    - !Firewall
+      name: Firewall2
+      private_key: 
+      address: 100.64.101.2/32
+      allowed_ips: 100.64.100.0/24
+      url: https://100.64.101.2:4444/
+
