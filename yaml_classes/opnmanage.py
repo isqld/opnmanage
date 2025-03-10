@@ -1,6 +1,7 @@
 from .firewall import Firewall
 from .tech import Tech
 from .interface import Interface
+from .device import Device
 from pywireguard.base.utils import generate_private_key, generate_public_key
 from ruamel.yaml.comments import CommentedMap
 from typing import List
@@ -10,18 +11,19 @@ from typing import TextIO
 class OpnManage:
     yaml_tag = '!OpnManage'
 
-    def __init__(self, server: Interface, techs: List[Tech], firewalls: List[Firewall]):
+    def __init__(self, server: Interface, techs: List[Tech], devices: List[Device], firewalls: List[Firewall]):
         
         self.interface = server
         self.techs = techs
+        self.devices = devices
         self.firewalls = firewalls
-
 
     @classmethod
     def to_yaml(cls, representer, data):
         return representer.represent_mapping(cls.yaml_tag,
                                              {'server' : data.interface,
                                               'techs' : data.techs,
+                                              'devices' : data.devices,
                                               'firewalls': data.firewalls})
 
     @classmethod
@@ -37,6 +39,12 @@ class OpnManage:
         config += f"Address={self.interface.address}\n\n"
         
         for peer in self.techs:
+            config += f"[Peer]\n"
+            config += f"# {peer.name}\n"
+            config += f"PublicKey={peer.public_key}\n"
+            config += f"AllowedIPs={peer.address}\n\n"
+        
+        for peer in self.devices:
             config += f"[Peer]\n"
             config += f"# {peer.name}\n"
             config += f"PublicKey={peer.public_key}\n"

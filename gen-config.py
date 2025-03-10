@@ -16,6 +16,7 @@ def init_yaml() -> YAML:
     yaml.register_class(OpnManage)
     yaml.register_class(Interface)
     yaml.register_class(Tech)
+    yaml.register_class(Device)
     yaml.register_class(Firewall)
 
     return yaml
@@ -100,7 +101,7 @@ def main():
     #HTML container for the list of firewalls
     firewall_html = div(cls='d-flex flex-wrap')
 
-    #Create a wireguard config for each of the peers
+    #Create a wireguard config for each of the Tech peers
     for peer in config.techs:
         peer_config_path = os.path.join(script_dir, f"{peers_folder_path}/{peer.name}.conf")
         peer.set_endpoint(config.interface)
@@ -108,7 +109,15 @@ def main():
         with open(peer_config_path, 'w') as file:
             peer.write_wireguard(file)
 
-    #Create a wireguard config for each of the peers
+    #Create a wireguard config for each of the Device peers
+    for peer in config.devices:
+        peer_config_path = os.path.join(script_dir, f"{peers_folder_path}/{peer.name}.conf")
+        peer.set_endpoint(config.interface)
+
+        with open(peer_config_path, 'w') as file:
+            peer.write_wireguard(file)
+
+    #Create a wireguard config for each of the Firewall peers
     for peer in config.firewalls:
         peer_config_path = os.path.join(script_dir, f"{peers_folder_path}/{peer.name}.conf")
         peer.set_endpoint(config.interface)
