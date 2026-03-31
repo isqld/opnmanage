@@ -26,6 +26,11 @@ config: !OpnManage
       private_key: qOryNoq+chAdZaQ6iHOqs5QIYpvLRFQIJqx8f8OKQ2s=
       address: 100.64.10.5/32
       allowed_ips: 100.64.101.0/24,100.64.102.0/24
+    - !Tech
+      name: Callum
+      private_key: YJonW7t/C/PD+8yREYrmhwbfEVcsl1TgAZ8y03qbsFA=
+      address: 100.64.10.6/32
+      allowed_ips: 100.64.101.0/24,100.64.102.0/24
   devices:
     - !Device
       name: IntegratedSolutions-SBC
@@ -95,7 +100,7 @@ config: !OpnManage
       url: https://100.64.101.10:4444/
     - !Firewall
       name: DRD
-      private_key: mCRlpYATiZhpKKZxvLSRyRbealtVRH4FSl6Vp9jBvWM=
+      private_key: EPPdrR30J/gWTdZ/SEd6dmOsjGO6xCdqi84jxrZaf2k=
       address: 100.64.101.11/32
       allowed_ips: 100.64.10.0/24
       url: https://100.64.101.11:4444/
@@ -129,3 +134,21 @@ config: !OpnManage
       address: 100.64.101.16/32
       allowed_ips: 100.64.10.0/24
       url: https://100.64.101.16:4444/
+    - !Firewall
+      name: IntegratedSolutions-TrishHome
+      private_key: kPKuG9daC5IaakdAvkInkPzucz+yBdui65qwD62Tx1Q=
+      address: 100.64.101.17/32
+      allowed_ips: 100.64.10.0/24
+      url: https://100.64.101.17:4444/
+    - !Firewall
+      name: SmallWorldJourneys
+      private_key: OODq8R5YGkM2cd3avXeWpb9jVpgGsIRrdxJP4vxQWEA=
+      address: 100.64.101.18/32
+      allowed_ips: 100.64.10.0/24
+      url: https://100.64.101.18:4444/
+    - !Firewall
+      name: ReefHouse
+      private_key: 6D6EdeQ+ykVhjL16u9VQO/JTCtXr1Wp0FdQZ8R2fkHo=
+      address: 100.64.101.19/32
+      allowed_ips: 100.64.10.0/24
+      url: https://100.64.101.19:4444
