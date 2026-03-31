@@ -15,7 +15,7 @@ RUN \
     sed -i \
         -e 's/VSERVER/DOCKER/' \
         -e 's/checkpath -d "$RC_SVCDIR"/mkdir "$RC_SVCDIR"/' \
-        /lib/rc/sh/init.sh && \
+        /usr/libexec/rc/sh/init.sh && \
     rm \
         /etc/init.d/hwdrivers \
         /etc/init.d/machine-id && \
