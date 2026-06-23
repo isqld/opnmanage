@@ -152,3 +152,15 @@ config: !OpnManage
       address: 100.64.101.19/32
       allowed_ips: 100.64.10.0/24
       url: https://100.64.101.19:4444
+    - !Firewall
+      name: ATL
+      private_key: MAk/iNAz5VNrAu9JPLscNn88UJqE6eJoBwqEDueF/mQ=
+      address: 100.64.101.20/32
+      allowed_ips: 100.64.10.0/24
+      url: https://100.64.101.20:4444
+    - !Firewall
+      name: LGL
+      private_key: +PS0Kn90bfZtnEqVdOd9EoWSKYfYoLWjaXhLvyMOmU0=
+      address: 100.64.101.21/32
+      allowed_ips: 100.64.10.0/24
+      url: https://100.64.101.21:4444
