@@ -9,3 +9,8 @@ The main benfit is that it doesn't matter if the firewall is behind another devi
 
 As the name may suggest, this was designed to work with a bunch of opnSense firewalls, but any firewall (or device) that can establish
 a connection and has a web interface could be used
+
+## Migrating to a new server
+To migrate to a new Docker Host make sure you copy across config/wg0.conf from the old server as this file contains all the private keys. If you do not copy this file over the next time you run gen-config.py new keys will be generated for all peers. This will mean all peers will need to be reconfigured.
+
+You will also need to manually create the public_net bridge in the docker host as the compose file does not build it automatically.
